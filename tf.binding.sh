@@ -27,13 +27,27 @@ module load biotools
 cd ~/biom262/biom262_hw/biom262-hw1
 
 # exercise 1
+awk -F "\t" '{ if ($4 == "NFKB") {print $0}}' tf.bed > tf.nfkb.bed
 
 # exercise 2
+awk -F "\t" '{ if ($3 =="transcript") {print $0}}' gencode.v19.annotation.chr22.gtf > \
+  gencode.v19.annotation.chr22.transcript.gtf
 
 # exercise 3
+awk -F "\t" '{ if ( $7 =="+" ) {print $0}}' gencode.v19.annotation.chr22.transcript.gtf | \
+  bedtools flank -g hg19.genome -l 2000 -r 0 > temp.promoters.plusStrand
+awk -F "\t" '{ if ( $7 =="-" ) {print $0}}' gencode.v19.annotation.chr22.transcript.gtf | \
+  bedtools flank -g hg19.genome -l 0 -r 2000 > temp.promoters.minusStrand
+cat temp.promoters.plusStrand temp.promoters.minusStrand | sort -k1,1 -k4,4n > \
+  gencode.v19.annotation.chr22.transcript.promoter.gtf
+rm temp.promoters.plusStrand temp.promoters.minusStrand
 
 # exercise 4
+bedtools intersect -a gencode.v19.annotation.chr22.transcript.promoter.gtf -b tf.nfkb.bed > \
+  gencode.v19.annotation.chr22.transcript.promoter.nfkb.gtf
 
 # exercise 5
+bedtools getfasta -fi GRCh37.p13.chr22.fa -bed gencode.v19.annotation.chr22.transcript.promoter.nfkb.gtf \
+  -s -fo gencode.v19.annotation.chr22.transcript.promoter.nfkb.fasta
 
 
