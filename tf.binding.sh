@@ -20,6 +20,9 @@
 
 #PBS -A bejar-group
 
+# add line to go to stdout
+echo "Hello I am a message in standard out (stdout)"
+
 # load programs we need 
 module load biotools
 
