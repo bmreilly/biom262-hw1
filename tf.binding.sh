@@ -37,13 +37,8 @@ awk -F "\t" '{ if ($3 =="transcript") {print $0}}' gencode.v19.annotation.chr22.
   gencode.v19.annotation.chr22.transcript.gtf
 
 # exercise 3
-awk -F "\t" '{ if ( $7 =="+" ) {print $0}}' gencode.v19.annotation.chr22.transcript.gtf | \
-  bedtools flank -g hg19.genome -l 2000 -r 0 > temp.promoters.plusStrand
-awk -F "\t" '{ if ( $7 =="-" ) {print $0}}' gencode.v19.annotation.chr22.transcript.gtf | \
-  bedtools flank -g hg19.genome -l 0 -r 2000 > temp.promoters.minusStrand
-cat temp.promoters.plusStrand temp.promoters.minusStrand | sort -k1,1 -k4,4n > \
-  gencode.v19.annotation.chr22.transcript.promoter.gtf
-rm temp.promoters.plusStrand temp.promoters.minusStrand
+bedtools flank -g hg19.genome -l 2000 -r 0 -s -i gencode.v19.annotation.chr22.transcript.gtf > gencode.v19.annotation.chr22.transcript.promoter.gtf
+
 
 # exercise 4
 bedtools intersect -a gencode.v19.annotation.chr22.transcript.promoter.gtf -b tf.nfkb.bed > \
