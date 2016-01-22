@@ -23,6 +23,9 @@
 # add line to go to stdout
 echo "Hello I am a message in standard out (stdout)"
 
+# add line to go to error output
+echo "Hello I am a message in standard error (stderr) >&2"
+
 # load programs we need 
 module load biotools
 
