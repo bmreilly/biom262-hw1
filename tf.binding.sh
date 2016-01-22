@@ -38,9 +38,9 @@ awk -F "\t" '{ if ($4 == "NFKB") {print;}}' tf.bed > tf.nfkb.bed
 # Exercise 2 Answer
 awk -F "\t" '{ if ($3 =="transcript") {print;}}' gencode.v19.annotation.chr22.gtf >  gencode.v19.annotation.chr22.transcript.gtf
 
-# exercise 3
-bedtools flank -g hg19.genome -l 2000 -r 0 -s -i gencode.v19.annotation.chr22.transcript.gtf > gencode.v19.annotation.chr22.transcript.promoter.gtf
-
+# Exercise 3 Answer
+module load biotools
+bedtools flank -i gencode.v19.annotation.chr22.transcript.gtf -g hg19.genome -l 2000 -r 0 -s > gencode.v19.annotation.chr22.transcript.promoter.gtf
 
 # exercise 4
 bedtools intersect -a gencode.v19.annotation.chr22.transcript.promoter.gtf -b tf.nfkb.bed > \
