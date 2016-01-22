@@ -35,9 +35,8 @@ cd ~/biom262/biom262_hw/biom262-hw1
 # Exerise 1 Answer 
 awk -F "\t" '{ if ($4 == "NFKB") {print;}}' tf.bed > tf.nfkb.bed
 
-# exercise 2
-awk -F "\t" '{ if ($3 =="transcript") {print $0}}' gencode.v19.annotation.chr22.gtf > \
-  gencode.v19.annotation.chr22.transcript.gtf
+# Exercise 2 Answer
+awk -F "\t" '{ if ($3 =="transcript") {print;}}' gencode.v19.annotation.chr22.gtf >  gencode.v19.annotation.chr22.transcript.gtf
 
 # exercise 3
 bedtools flank -g hg19.genome -l 2000 -r 0 -s -i gencode.v19.annotation.chr22.transcript.gtf > gencode.v19.annotation.chr22.transcript.promoter.gtf
