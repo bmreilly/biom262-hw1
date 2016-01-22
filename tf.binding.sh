@@ -32,8 +32,8 @@ module load biotools
 # change to directory where we have our data files + we want our output files
 cd ~/biom262/biom262_hw/biom262-hw1
 
-# exercise 1
-awk -F "\t" '{ if ($4 == "NFKB") {print $0}}' tf.bed > tf.nfkb.bed
+# Exerise 1 Answer 
+awk -F "\t" '{ if ($4 == "NFKB") {print;}}' tf.bed > tf.nfkb.bed
 
 # exercise 2
 awk -F "\t" '{ if ($3 =="transcript") {print $0}}' gencode.v19.annotation.chr22.gtf > \
